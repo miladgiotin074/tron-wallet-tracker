@@ -1,0 +1,27 @@
+services:
+  - type: worker
+    name: tron-wallet-tracker
+    runtime: node
+    plan: starter
+    buildCommand: npm ci
+    startCommand: npm start
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATA_DIR
+        value: /data
+      - key: POLL_INTERVAL_MS
+        value: "2500"
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_ADMIN_IDS
+        sync: false
+      - key: TRONGRID_API_KEY
+        sync: false
+      - key: TRONSCAN_API_KEY
+        sync: false
+    disk:
+      name: wallet-data
+      mountPath: /data
+      sizeGB: 1
